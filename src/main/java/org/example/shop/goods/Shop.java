@@ -64,7 +64,19 @@ public class Shop {
     }
 
     public void addEmployeeToStore(long id, Cashiers cashier){
-
         cashierAndId.put(cashier.getId(), cashier);
+    }
+
+    @Override
+    public String toString() {
+        return "Shop{" +
+                "foodMarkup=" + foodMarkup +
+                ", nonFoodMarkup=" + nonFoodMarkup +
+                ", numberOfCheckouts=" + numberOfCheckouts +
+                ", expiryDateDiscount=" + expiryDateDiscount +
+                ", cashiersCheckoutMap=" + cashiersCheckoutMap +
+                ", idAndGoods=" + idAndGoods +
+                ", cashierAndId=" + cashierAndId +
+                '}';
     }
 }
