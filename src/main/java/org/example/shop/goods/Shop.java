@@ -17,6 +17,7 @@ public class Shop {
     private Map<Integer, Cashiers> cashiersCheckoutMap;
     private Map<Long, Goods> idAndGoods;
     private Map<Long, String> idAndCashier;
+    private Map<Integer, String> quantityAndGoods;
 
 
     public Shop(BigDecimal foodMarkup, BigDecimal nonFoodMarkup, int numberOfCheckouts, int expiryDateDiscount) {
@@ -27,6 +28,7 @@ public class Shop {
         this.cashiersCheckoutMap = new HashMap<>();
         this.idAndGoods = new HashMap<>();
         this.idAndCashier = new LimitedHashMap<>(numberOfCheckouts);
+        this.quantityAndGoods = new HashMap<>();
     }
 
     public BigDecimal getFoodMarkup() {
@@ -57,6 +59,9 @@ public class Shop {
         return idAndCashier;
     }
 
+    public Map<Integer, String> getQuantityAndGoods() {
+        return quantityAndGoods;
+    }
 
     public Cashiers checkIfIdExists(Cashiers cashiers) throws idExistsExeption {
         if (idAndCashier.containsKey(cashiers.getId())){
@@ -71,9 +76,9 @@ public class Shop {
         idAndCashier.put(cashier.getId(), cashier.getName());
     }
 
-    public void addGoodsAndFoodToMap(Goods goods){
+    public void addGoodsToMap(Goods goods, int quantity){
         //principno tuk shte e po-dobre da gi razdedlish na foodtype i nonfoodtype
-        //idAndGoods.put()
+        quantityAndGoods.put(quantity, goods.getName());
     }
 
     @Override
@@ -85,9 +90,11 @@ public class Shop {
                 ", expiryDateDiscount=" + expiryDateDiscount +
                 ", cashiersCheckoutMap=" + cashiersCheckoutMap +
                 ", idAndGoods=" + idAndGoods +
-                ", cashierAndId=" + idAndCashier +
+                ", idAndCashier=" + idAndCashier +
+                ", quantityAndGoods=" + quantityAndGoods +
                 '}';
     }
+
     public void printIdAndCashier(){
         for (Map.Entry<Long, String> entry : idAndCashier.entrySet()){
             System.out.println(entry.getKey() + " : " + entry.getValue());
