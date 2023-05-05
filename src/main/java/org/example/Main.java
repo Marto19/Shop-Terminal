@@ -15,7 +15,7 @@ public class Main {
 
         Cashiers cashier1 = new Cashiers("Marinka", 1,BigDecimal.valueOf(1500));
         shop.addEmployeeToStore(cashier1);
-        shop.printCashierAndId();
+        shop.printIdAndCashier();
 
         Goods good1 = new Goods(1, "bob", BigDecimal.valueOf(3), Type.FOOD, LocalDate.of(2023,6,5));
     }

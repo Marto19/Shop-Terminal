@@ -16,7 +16,8 @@ public class Shop {
     private int expiryDateDiscount;
     private Map<Integer, Cashiers> cashiersCheckoutMap;
     private Map<Long, Goods> idAndGoods;
-    private Map<Long, String> cashierAndId;
+    private Map<Long, String> idAndCashier;
+
 
     public Shop(BigDecimal foodMarkup, BigDecimal nonFoodMarkup, int numberOfCheckouts, int expiryDateDiscount) {
         this.foodMarkup = foodMarkup;
@@ -25,7 +26,7 @@ public class Shop {
         this.expiryDateDiscount = expiryDateDiscount;
         this.cashiersCheckoutMap = new HashMap<>();
         this.idAndGoods = new HashMap<>();
-        this.cashierAndId = new LimitedHashMap<>(numberOfCheckouts);
+        this.idAndCashier = new LimitedHashMap<>(numberOfCheckouts);
     }
 
     public BigDecimal getFoodMarkup() {
@@ -52,13 +53,13 @@ public class Shop {
         return idAndGoods;
     }
 
-    public Map<Long, String> getCashierAndId() {
-        return cashierAndId;
+    public Map<Long, String> getIdAndCashier() {
+        return idAndCashier;
     }
 
 
     public Cashiers checkIfIdExists(Cashiers cashiers) throws idExistsExeption {
-        if (cashierAndId.containsKey(cashiers.getId())){
+        if (idAndCashier.containsKey(cashiers.getId())){
             throw new idExistsExeption("ID already exists");
         }
         else{
@@ -67,7 +68,12 @@ public class Shop {
     }
 
     public void addEmployeeToStore(Cashiers cashier){
-        cashierAndId.put(cashier.getId(), cashier.getName());
+        idAndCashier.put(cashier.getId(), cashier.getName());
+    }
+
+    public void addGoodsAndFoodToMap(Goods goods){
+        //principno tuk shte e po-dobre da gi razdedlish na foodtype i nonfoodtype
+        //idAndGoods.put()
     }
 
     @Override
@@ -79,12 +85,13 @@ public class Shop {
                 ", expiryDateDiscount=" + expiryDateDiscount +
                 ", cashiersCheckoutMap=" + cashiersCheckoutMap +
                 ", idAndGoods=" + idAndGoods +
-                ", cashierAndId=" + cashierAndId +
+                ", cashierAndId=" + idAndCashier +
                 '}';
     }
-    public void printCashierAndId(){
-        for (Map.Entry<Long, String> entry : cashierAndId.entrySet()){
+    public void printIdAndCashier(){
+        for (Map.Entry<Long, String> entry : idAndCashier.entrySet()){
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
     }
+
 }
