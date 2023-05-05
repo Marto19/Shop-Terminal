@@ -2,6 +2,7 @@ package org.example.shop.goods;
 
 import org.example.shop.goods.exeptions.idExistsExeption;
 import org.example.shop.goods.goods.Goods;
+import org.example.shop.goods.overridenstructures.LimitedHashMap;
 
 import javax.security.auth.callback.CallbackHandler;
 import java.math.BigDecimal;
@@ -24,7 +25,7 @@ public class Shop {
         this.expiryDateDiscount = expiryDateDiscount;
         this.cashiersCheckoutMap = new HashMap<>();
         this.idAndGoods = new HashMap<>();
-        this.cashierAndId = new HashMap<>();
+        this.cashierAndId = new LimitedHashMap<>(numberOfCheckouts);
     }
 
     public BigDecimal getFoodMarkup() {
