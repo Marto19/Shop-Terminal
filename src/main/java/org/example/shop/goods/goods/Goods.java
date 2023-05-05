@@ -61,27 +61,37 @@ public class Goods implements Services {
         long daysUntilExpiry = currentDate.until(expiryDate, ChronoUnit.DAYS);
         if (type == Type.FOOD ) {
             if (daysUntilExpiry <= 10) {
-                unitShippingCost = unitShippingCost.add(unitShippingCost.multiply(shop.getFoodMarkup().divide(BigDecimal.valueOf(100))));//new number = old number + (old number * 0.1)
-                //Make it do something//SUBTRACT FROM THE PRICE
+                unitShippingCost = applyFoodMarkup(unitShippingCost, shop.getFoodMarkup());//new number = old number + (old number * 0.1)
+                subtractFromPrice();//SUBTRACT FROM THE PRICE
             } else {
-                try {
-                    throw new expiryDateExeption("Тhis product has expired.");
-                } catch (expiryDateExeption e) {
-                    throw new RuntimeException(e);
-                }
+                handleExpiredProduct();
             }
-        }
-        else if(type == Type.NONFOOD){
+        } else if(type == Type.NONFOOD){
             if(daysUntilExpiry <= 10){
-                //make it do something else//SUBTRACT FROM THE PRICE
-            }else{
-                try {
-                    throw new expiryDateExeption("Тhis product has expired.");
-                } catch (expiryDateExeption e) {
-                    throw new RuntimeException(e);
-                }
+                subtractFromPrice();//SUBTRACT FROM THE PRICE
+            } else{
+                handleExpiredProduct();
             }
         }
         return null;
     }
+
+    private BigDecimal applyFoodMarkup(BigDecimal cost, BigDecimal markup) {
+        BigDecimal percent = markup.divide(BigDecimal.valueOf(100));
+        unitShippingCost = cost.add(cost.multiply(percent));
+        return percent;
+    }
+
+    private void subtractFromPrice() {
+        // logic to subtract from price goes here
+    }
+
+    private void handleExpiredProduct() {
+        try {
+            throw new expiryDateExeption("Тhis product has expired.");
+        } catch (expiryDateExeption e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
