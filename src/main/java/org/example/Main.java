@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 
 public class Main {
     public static void main(String[] args) {
-        Shop shop = new Shop(BigDecimal.valueOf(0.1), BigDecimal.valueOf(0.2), 15);
+        Shop shop = new Shop(BigDecimal.valueOf(20), BigDecimal.valueOf(20), 15, 15);
 
     }
 }

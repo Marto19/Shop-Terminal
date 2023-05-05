@@ -62,13 +62,13 @@ public class Goods implements Services {
         if (type == Type.FOOD ) {
             if (daysUntilExpiry <= 10) {
                 unitShippingCost = applyFoodMarkup(unitShippingCost, shop.getFoodMarkup());//new number = old number + (old number * 0.1)
-                subtractFromPrice();//SUBTRACT FROM THE PRICE
+                subtractFromPrice(unitShippingCost, shop);//SUBTRACT FROM THE PRICE
             } else {
                 handleExpiredProduct();
             }
         } else if(type == Type.NONFOOD){
             if(daysUntilExpiry <= 10){
-                subtractFromPrice();//SUBTRACT FROM THE PRICE
+                subtractFromPrice(unitShippingCost, shop);//SUBTRACT FROM THE PRICE
             } else{
                 handleExpiredProduct();
             }
@@ -82,9 +82,9 @@ public class Goods implements Services {
         return percent;
     }
 
-    private void subtractFromPrice() {
-
-        // logic to subtract from price goes here
+    private BigDecimal subtractFromPrice(BigDecimal unitShippingCost, Shop shop) {
+        unitShippingCost = unitShippingCost.multiply(BigDecimal.valueOf(shop.getExpiryDateDiscount()).divide(BigDecimal.valueOf(100)));
+        return unitShippingCost;                // logic to subtract from price goes here
     }
 
     private void handleExpiredProduct() {
