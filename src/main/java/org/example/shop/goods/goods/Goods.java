@@ -83,6 +83,7 @@ public class Goods implements Services {
     }
 
     private void subtractFromPrice() {
+
         // logic to subtract from price goes here
     }
 

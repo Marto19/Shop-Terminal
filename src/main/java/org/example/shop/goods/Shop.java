@@ -11,15 +11,16 @@ public class Shop {
     private BigDecimal foodMarkup;
     private BigDecimal nonFoodMarkup;
     private int numberOfCheckouts;
+    private int expiryDateDiscount;
     private Map<Integer, Cashiers> cashiersCheckoutMap;
     private Map<Long, Goods> idAndGoods;
     private Map<Long, Cashiers> cashierAndId;
 
-    public Shop(BigDecimal foodMarkup, BigDecimal nonFoodMarkup, int numberOfCheckouts) {
+    public Shop(BigDecimal foodMarkup, BigDecimal nonFoodMarkup, int numberOfCheckouts, int expiryDateDiscount) {
         this.foodMarkup = foodMarkup;
         this.nonFoodMarkup = nonFoodMarkup;
         this.numberOfCheckouts = numberOfCheckouts;
-
+        this.expiryDateDiscount = expiryDateDiscount;
         this.cashiersCheckoutMap = new HashMap<>();
         this.idAndGoods = new HashMap<>();
         this.cashierAndId = new HashMap<>();
@@ -35,6 +36,10 @@ public class Shop {
 
     public int getNumberOfCheckouts() {
         return numberOfCheckouts;
+    }
+
+    public int getExpiryDateDiscount() {
+        return expiryDateDiscount;
     }
 
     public Map<Integer, Cashiers> getCashiersCheckoutMap() {
