@@ -1,10 +1,10 @@
 package org.example.shop.goods;
 
 import org.example.shop.goods.exeptions.EmployeesExceedShopLimit;
-import org.example.shop.goods.exeptions.expiryDateExeption;
 
 import java.math.BigDecimal;
 import java.util.Random;
+import java.util.UUID;
 
 public class Cashiers {
     private String name;
@@ -15,6 +15,10 @@ public class Cashiers {
         this.name = name;
         this.id = id;
         this.monthlySalary = monthlySalary;
+    }
+
+    public Cashiers() {             //HAVE THAT IN MIND
+        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
     public String getName() {
@@ -46,10 +50,13 @@ public class Cashiers {
             Random random = new Random();
             for(int i = 0; i < numberOfEmployees; i++){
                 String name = "Cashier" + random.nextInt(1000);
-                long id = random.nextLong();
+                //long id = random.nextLong();
+                long id = i+1;
                 BigDecimal monthlySalary = BigDecimal.valueOf(random.nextInt(5000) + 2000);
 
-                Cashiers cashier = new Cashiers(name, id, monthlySalary);
+                Cashiers cashier = new Cashiers(name, id, monthlySalary); //THE NAME IS RANDOMLY GENERATED SUCH AS: Cashier660, THAT'S THE NAME
+                shop.addEmployeeToStore(cashier);
+                shop.addCashierToSet(cashier);
             }
         }
     }

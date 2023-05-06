@@ -7,7 +7,9 @@ import org.example.shop.goods.overridenstructures.LimitedHashMap;
 import javax.security.auth.callback.CallbackHandler;
 import java.math.BigDecimal;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class Shop {
     private BigDecimal foodMarkup;
@@ -18,6 +20,7 @@ public class Shop {
     private Map<Long, Goods> idAndGoods;
     private Map<Long, String> idAndCashier;
     private Map<Integer, String> quantityAndGoods;
+    private Set<Cashiers> cashiersSet;
 
 
     public Shop(BigDecimal foodMarkup, BigDecimal nonFoodMarkup, int numberOfCheckouts, int expiryDateDiscount) {
@@ -29,6 +32,7 @@ public class Shop {
         this.idAndGoods = new HashMap<>();
         this.idAndCashier = new LimitedHashMap<>(numberOfCheckouts);
         this.quantityAndGoods = new HashMap<>();
+        this.cashiersSet = new HashSet<>();
     }
 
     public BigDecimal getFoodMarkup() {
@@ -63,6 +67,10 @@ public class Shop {
         return quantityAndGoods;
     }
 
+    public Set<Cashiers> getCashiersSet() {
+        return cashiersSet;
+    }
+
     public Cashiers checkIfIdExists(Cashiers cashiers) throws idExistsExeption {
         if (idAndCashier.containsKey(cashiers.getId())){
             throw new idExistsExeption("ID already exists");
@@ -75,6 +83,11 @@ public class Shop {
     public void addEmployeeToStore(Cashiers cashier){
         idAndCashier.put(cashier.getId(), cashier.getName());
     }
+
+    public void addEmployeeToSet(Cashiers cashier){
+        cashiersSet.add(cashier);
+    }
+
 
     public void addGoodsToMap(Goods goods, int quantity){
         //principno tuk shte e po-dobre da gi razdedlish na foodtype i nonfoodtype
@@ -97,12 +110,35 @@ public class Shop {
 
     public void printIdAndCashier(){
         for (Map.Entry<Long, String> entry : idAndCashier.entrySet()){
-            System.out.println(entry.getKey() + " : " + entry.getValue());
+            System.out.println("Id: " + entry.getKey() + " | " + "name: " + entry.getValue());
         }
     }
 
-    public void assignCashierToCheckout(int checkoutNumber, Cashiers cashier){
-        cashiersCheckoutMap.put(checkoutNumber, cashier);
+    public void addCashierToSet(Cashiers cashier){
+        cashiersSet.add(cashier);
     }
 
+    public void assignCashierToCheckout(int numberOfCheckouts, Set<Cashiers> cashiersSet) {
+        int checkoutNumber = 1;
+        for (Cashiers cashier : cashiersSet) {
+            cashiersCheckoutMap.put(checkoutNumber++, cashier);
+        }
+    }
+
+    public void printCheckoutAndCashier(){
+        for (Map.Entry<Integer, Cashiers> entry : cashiersCheckoutMap.entrySet()){
+            System.out.println("Checkout: " + entry.getKey() + " | " + " name: " + entry.getValue().getName() + " id = " + entry.getValue().getId());
+        }
+    }
+//        int checkoutNumber = 1;
+//        for (Map.Entry<Long, Cashiers> entry : idAndCashier.entrySet()) {
+//            Long id = entry.getKey();
+//            Cashiers cashier = entry.getValue();
+//            if (checkoutNumber > numberOfCheckouts) {
+//                checkoutNumber = 1;
+//            }
+//            cashiersCheckoutMap.put(checkoutNumber++, cashier);
+//        }
+
+//cashiersCheckoutMap.put(checkoutNumber, cashier);
 }

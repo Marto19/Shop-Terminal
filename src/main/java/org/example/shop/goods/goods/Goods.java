@@ -16,7 +16,7 @@ public class Goods implements Services {
     private LocalDate expiryDate;
 
     public Goods(long id, String name, BigDecimal unitShippingCost, Type type, LocalDate expiryDate) {
-        this.id = id;//sdsdsd
+        this.id = id;
         this.name = name;
         this.unitShippingCost = unitShippingCost;
         this.type = type;
