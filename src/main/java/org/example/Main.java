@@ -17,7 +17,9 @@ public class Main {
         shop.addEmployeeToStore(cashier1);
         shop.printIdAndCashier();
 
-        Goods good1 = new Goods(1, "bob", BigDecimal.valueOf(3), Type.FOOD, LocalDate.of(2023,6,5));
+        //Goods good1 = new Goods(1, "bob", BigDecimal.valueOf(3), Type.FOOD, LocalDate.of(2023,6,5));
+
+        
     }
 }
 

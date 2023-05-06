@@ -101,4 +101,8 @@ public class Shop {
         }
     }
 
+    public void assignCashierToCheckout(int checkoutNumber, Cashiers cashier){
+        cashiersCheckoutMap.put(checkoutNumber, cashier);
+    }
+
 }
