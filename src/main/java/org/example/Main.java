@@ -29,6 +29,10 @@ public class Main {
         System.out.println("Id and cashier's name: ");
         shop.printIdAndCashier();       //print all the cashiers with their ids
 
+        System.out.println();
+        System.out.println("CASHIERS:");
+        shop.printCashiers();
+
         //now that we've created our cashiers, we need to assign them checkouts
         shop.assignCashierToCheckout(shop.getNumberOfCheckouts(), shop.getCashiersSet());
         System.out.println();

@@ -114,6 +114,12 @@ public class Shop {
         }
     }
 
+    public void printCashiers(){
+        for (Cashiers cashier : cashiersSet){
+            System.out.println(cashier);
+        }
+    }
+
     public void addCashierToSet(Cashiers cashier){
         cashiersSet.add(cashier);
     }
