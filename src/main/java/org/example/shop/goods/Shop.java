@@ -153,3 +153,8 @@ public class Shop {
         }
     }
 }
+
+//TODO: CREATE RECEIPT CLASS, EVERYTIME WE SELL A GOOD FROM THE STORE TO BE CREATED. INFO NEEDED:Next number,
+//cashier who issues the receipt, date and time of issuance of the receipt, list of
+//goods that are included in the receipt including their price and quantity and the total
+//value to be paid by the customer

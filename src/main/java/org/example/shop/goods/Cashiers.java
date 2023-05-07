@@ -74,6 +74,4 @@ public class Cashiers {
         goods.setMarked(true);
     }
 
-
-
 }
