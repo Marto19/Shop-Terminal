@@ -4,6 +4,7 @@ import org.example.shop.goods.exeptions.EmployeesExceedShopLimit;
 import org.example.shop.goods.goods.Goods;
 
 import java.math.BigDecimal;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -70,8 +71,27 @@ public class Cashiers {
         }
     }
 
-    public void productMarking(Shop shop, Goods goods){
-        goods.setMarked(true);
+    public void productMarking(Shop shop, Cashiers cashiers, Customer customer) {
+        Map<String, Integer> shoppingList = customer.getShoppingList();
+        for (Map.Entry<String, Integer> entry : shoppingList.entrySet()) {
+            String itemName = entry.getKey();
+            int quantity = entry.getValue();
+            boolean itemExists = checkIfItemExists(shop, itemName, quantity);
+            if (!itemExists) {
+                System.out.println("Sorry, we don't have enough " + itemName + " in stock for your purchase.");
+            }
+        }
     }
+
+    private boolean checkIfItemExists(Shop shop, String itemName, int quantity) {
+        for (Map.Entry<Goods, Integer> goodsEntry : shop.getQuantityAndGoods().entrySet()) {
+            if (goodsEntry.getKey().getName().equals(itemName) && goodsEntry.getValue() >= quantity) {
+                goodsEntry.getKey().setMarked(true);
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
