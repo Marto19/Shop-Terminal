@@ -14,6 +14,7 @@ public class Goods implements Services {
     private BigDecimal unitShippingCost;
     private Type type;
     private LocalDate expiryDate;
+    private boolean isMarked;
 
     public Goods(long id, String name, BigDecimal unitShippingCost, Type type, LocalDate expiryDate) {
         this.id = id;
@@ -21,6 +22,7 @@ public class Goods implements Services {
         this.unitShippingCost = unitShippingCost;
         this.type = type;
         this.expiryDate = expiryDate;
+        this.isMarked = false;
     }
 
     public long getId() {
@@ -43,6 +45,14 @@ public class Goods implements Services {
         return expiryDate;
     }
 
+    public boolean isMarked() {
+        return isMarked;
+    }
+
+    public void setMarked(boolean marked) {
+        isMarked = marked;
+    }
+
     @Override
     public String toString() {
         return "Goods{" +
@@ -51,6 +61,7 @@ public class Goods implements Services {
                 ", unitShippingCost=" + unitShippingCost +
                 ", type=" + type +
                 ", expiryDate=" + expiryDate +
+                ", isMarked=" + isMarked +
                 '}';
     }
 

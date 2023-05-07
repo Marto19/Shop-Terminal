@@ -1,6 +1,7 @@
 package org.example.shop.goods;
 
 import org.example.shop.goods.exeptions.EmployeesExceedShopLimit;
+import org.example.shop.goods.goods.Goods;
 
 import java.math.BigDecimal;
 import java.util.Random;
@@ -67,6 +68,11 @@ public class Cashiers {
         } catch (EmployeesExceedShopLimit e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void productMarking(Shop shop, Goods goods){
+
+
     }
 
 }

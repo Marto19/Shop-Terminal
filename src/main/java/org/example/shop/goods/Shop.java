@@ -19,7 +19,7 @@ public class Shop {
     private Map<Integer, Cashiers> cashiersCheckoutMap;
     private Map<Long, Goods> idAndGoods;
     private Map<Long, String> idAndCashier;
-    private Map<Integer, String> quantityAndGoods;
+    private Map<Goods, Integer> goodsAndQuantity;
     private Set<Cashiers> cashiersSet;
 
 
@@ -31,7 +31,7 @@ public class Shop {
         this.cashiersCheckoutMap = new HashMap<>();
         this.idAndGoods = new HashMap<>();
         this.idAndCashier = new LimitedHashMap<>(numberOfCheckouts);
-        this.quantityAndGoods = new HashMap<>();
+        this.goodsAndQuantity = new HashMap<>();
         this.cashiersSet = new HashSet<>();
     }
 
@@ -63,8 +63,8 @@ public class Shop {
         return idAndCashier;
     }
 
-    public Map<Integer, String> getQuantityAndGoods() {
-        return quantityAndGoods;
+    public Map<Goods, Integer> getQuantityAndGoods() {
+        return goodsAndQuantity;
     }
 
     public Set<Cashiers> getCashiersSet() {
@@ -91,7 +91,7 @@ public class Shop {
 
     public void addGoodsToMap(Goods goods, int quantity){
         //principno tuk shte e po-dobre da gi razdedlish na foodtype i nonfoodtype
-        quantityAndGoods.put(quantity, goods.getName());
+        goodsAndQuantity.put(goods, quantity);
     }
 
     @Override
@@ -104,7 +104,7 @@ public class Shop {
                 ", cashiersCheckoutMap=" + cashiersCheckoutMap +
                 ", idAndGoods=" + idAndGoods +
                 ", idAndCashier=" + idAndCashier +
-                ", quantityAndGoods=" + quantityAndGoods +
+                ", quantityAndGoods=" + goodsAndQuantity +
                 '}';
     }
 
@@ -136,15 +136,18 @@ public class Shop {
             System.out.println("Checkout: " + entry.getKey() + " | " + " name: " + entry.getValue().getName() + " id = " + entry.getValue().getId());
         }
     }
-//        int checkoutNumber = 1;
-//        for (Map.Entry<Long, Cashiers> entry : idAndCashier.entrySet()) {
-//            Long id = entry.getKey();
-//            Cashiers cashier = entry.getValue();
-//            if (checkoutNumber > numberOfCheckouts) {
-//                checkoutNumber = 1;
-//            }
-//            cashiersCheckoutMap.put(checkoutNumber++, cashier);
-//        }
 
-//cashiersCheckoutMap.put(checkoutNumber, cashier);
+    public void removeGoodsQuantity(Shop shop, Goods good, int quantity){
+        Integer currentQuantity = shop.goodsAndQuantity.get(good);
+        if (currentQuantity != null) {
+            int newQuantity = currentQuantity - quantity;
+            if (newQuantity <= 0) {
+                // if the new quantity is zero or negative, remove the good from the map
+                shop.goodsAndQuantity.remove(good);
+            } else {
+                // otherwise, update the map with the new quantity
+                shop.goodsAndQuantity.put(good, newQuantity);
+            }
+        }
+    }
 }
