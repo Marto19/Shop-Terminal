@@ -78,6 +78,7 @@ public class Goods implements Services {
             }
         } else if(type == Type.NONFOOD){
             if(daysUntilExpiry <= 10){
+                unitShippingCost = applyFoodMarkup(unitShippingCost, shop.getNonFoodMarkup());//new number = old number + (old number * 0.1)
                 subtractFromPrice(unitShippingCost, shop);//SUBTRACT FROM THE PRICE
             } else{
                 handleExpiredProduct();
@@ -87,6 +88,12 @@ public class Goods implements Services {
     }
 
     private BigDecimal applyFoodMarkup(BigDecimal cost, BigDecimal markup) {
+        BigDecimal percent = markup.divide(BigDecimal.valueOf(100));
+        unitShippingCost = cost.add(cost.multiply(percent));
+        return percent;
+    }
+
+    private BigDecimal applyNonFoodMarkup(BigDecimal cost, BigDecimal markup) {
         BigDecimal percent = markup.divide(BigDecimal.valueOf(100));
         unitShippingCost = cost.add(cost.multiply(percent));
         return percent;

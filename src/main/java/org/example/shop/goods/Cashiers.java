@@ -71,8 +71,9 @@ public class Cashiers {
     }
 
     public void productMarking(Shop shop, Goods goods){
-
-
+        goods.setMarked(true);
     }
+
+
 
 }

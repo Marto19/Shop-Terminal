@@ -12,25 +12,27 @@ import java.util.Map;
 import java.util.Set;
 
 public class Shop {
-    private BigDecimal foodMarkup;
-    private BigDecimal nonFoodMarkup;
-    private int numberOfCheckouts;
-    private int expiryDateDiscount;
-    private Map<Integer, Cashiers> cashiersCheckoutMap;
-    private Map<Long, Goods> idAndGoods;
-    private Map<Long, String> idAndCashier;
-    private Map<Goods, Integer> goodsAndQuantity;
-    private Set<Cashiers> cashiersSet;
+    private BigDecimal foodMarkup;                          //food markup
+    private BigDecimal nonFoodMarkup;                       //non food markup
+    private int numberOfCheckouts;                          //the amount of checkouts in the store
+    private int expiryDateDiscount;                         //expiry date discount
+    private Map<Integer, Cashiers> cashiersCheckoutMap;    //hashmap to store the assigment of each cashier to a checkout
+    private Map<Long, Goods> idAndGoods;                //hashmap to store the id of the goods------------
+    private Map<Long, String> idAndCashier;             //hashmap to store cashier's id and his/hers name. Nore: randomly generated
+    private Map<Goods, Integer> goodsAndQuantity;       //hashmap to store goods and they're quantity in the store
+    private Set<Cashiers> cashiersSet;      //set to store all the cashiers
+    private Map<Goods, Integer> goodsAndQuantityAfterMarking;   //map to store the goods and they're quantity after marking/selling
+
 
 
     public Shop(BigDecimal foodMarkup, BigDecimal nonFoodMarkup, int numberOfCheckouts, int expiryDateDiscount) {
         this.foodMarkup = foodMarkup;
         this.nonFoodMarkup = nonFoodMarkup;
         this.numberOfCheckouts = numberOfCheckouts;
-        this.expiryDateDiscount = expiryDateDiscount;
-        this.cashiersCheckoutMap = new HashMap<>();
+        this.expiryDateDiscount = expiryDateDiscount;   //when creating a shop object, the user needs to specify only
+        this.cashiersCheckoutMap = new HashMap<>();     //the food/nonfood markup, the number of chouts and expiry date discount
         this.idAndGoods = new HashMap<>();
-        this.idAndCashier = new LimitedHashMap<>(numberOfCheckouts);
+        this.idAndCashier = new LimitedHashMap<>(numberOfCheckouts);  //when creating a new store the other storages will be created automatically
         this.goodsAndQuantity = new HashMap<>();
         this.cashiersSet = new HashSet<>();
     }
