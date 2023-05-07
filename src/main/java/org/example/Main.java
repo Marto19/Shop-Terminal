@@ -1,6 +1,7 @@
 package org.example;
 
 import org.example.shop.goods.Cashiers;
+import org.example.shop.goods.Customer;
 import org.example.shop.goods.Shop;
 import org.example.shop.goods.exeptions.EmployeesExceedShopLimit;
 import org.example.shop.goods.goods.Goods;
@@ -8,6 +9,7 @@ import org.example.shop.goods.goods.Type;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -38,6 +40,12 @@ public class Main {
         System.out.println();
         System.out.println("Id of the checkout and the cashier information:");
         shop.printCheckoutAndCashier();
+
+        //now we need customers
+        List<Customer> customers = Customer.generateRandomCustomers(5);
+        System.out.println();
+        System.out.println("These are the customers: ");
+        Customer.printCustomers(customers);
 
     }
 
