@@ -47,6 +47,8 @@ public class Main {
         System.out.println("These are the customers: ");
         Customer.printCustomers(customers);
 
+        //and now that we have our shop ready, the cashiers ready
+
     }
 
 }

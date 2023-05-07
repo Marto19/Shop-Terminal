@@ -77,7 +77,6 @@ public class Customer {
         return new BigDecimal(Math.random() * 500 + 50).setScale(2, RoundingMode.HALF_UP);
     }
 
-
     private static Map<String, Integer> getRandomShoppingList() {
         Map<String, Integer> shoppingList = new HashMap<>();
         String[] goods = {"apple", "banana", "orange", "peach", "pear", "grape", "watermelon", "pineapple", "mango"};
