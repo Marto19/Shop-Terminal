@@ -22,6 +22,7 @@ public class Shop {
     private Map<Goods, Integer> goodsAndQuantity;       //hashmap to store goods and they're quantity in the store
     private Set<Cashiers> cashiersSet;      //set to store all the cashiers
     private Map<Goods, Integer> goodsAndQuantityAfterMarking;   //map to store the goods and they're quantity after marking/selling
+    private Set<Goods> storeGoods;
 
 
 
@@ -35,6 +36,7 @@ public class Shop {
         this.idAndCashier = new LimitedHashMap<>(numberOfCheckouts);  //when creating a new store the other storages will be created automatically
         this.goodsAndQuantity = new HashMap<>();
         this.cashiersSet = new HashSet<>();
+        this.storeGoods = new HashSet<>();
     }
 
     public BigDecimal getFoodMarkup() {
@@ -96,6 +98,18 @@ public class Shop {
         goodsAndQuantity.put(goods, quantity);
     }
 
+    public Map<Goods, Integer> getGoodsAndQuantity() {
+        return goodsAndQuantity;
+    }
+
+    public Map<Goods, Integer> getGoodsAndQuantityAfterMarking() {
+        return goodsAndQuantityAfterMarking;
+    }
+
+    public Set<Goods> getStoreGoods() {
+        return storeGoods;
+    }
+
     @Override
     public String toString() {
         return "Shop{" +
@@ -126,6 +140,10 @@ public class Shop {
         cashiersSet.add(cashier);
     }
 
+    public void addGoodsToSet(Goods goods){
+        storeGoods.add(goods);
+    }
+
     public void assignCashierToCheckout(int numberOfCheckouts, Set<Cashiers> cashiersSet) {
         int checkoutNumber = 1;
         for (Cashiers cashier : cashiersSet) {
@@ -136,6 +154,12 @@ public class Shop {
     public void printCheckoutAndCashier(){
         for (Map.Entry<Integer, Cashiers> entry : cashiersCheckoutMap.entrySet()){
             System.out.println("Checkout: " + entry.getKey() + " | " + " name: " + entry.getValue().getName() + " id = " + entry.getValue().getId());
+        }
+    }
+
+    public void printStoreGoods(){
+        for (Goods goods : getStoreGoods()){
+            System.out.println(goods);
         }
     }
 
@@ -152,6 +176,8 @@ public class Shop {
             }
         }
     }
+
+
 }
 
 //TODO: CREATE RECEIPT CLASS, EVERYTIME WE SELL A GOOD FROM THE STORE TO BE CREATED. INFO NEEDED:Next number,

@@ -5,10 +5,8 @@ import org.example.shop.goods.Customer;
 import org.example.shop.goods.Shop;
 import org.example.shop.goods.exeptions.EmployeesExceedShopLimit;
 import org.example.shop.goods.goods.Goods;
-import org.example.shop.goods.goods.Type;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
@@ -48,7 +46,11 @@ public class Main {
         Customer.printCustomers(customers);
 
         //and now that we have our shop ready, the cashiers ready
-
+        System.out.println();
+        System.out.println("NQKWI GOODS TAM: ");
+        Goods goods = new Goods();
+        goods.generateGoods(5, shop);
+        shop.printStoreGoods();
     }
 
 }

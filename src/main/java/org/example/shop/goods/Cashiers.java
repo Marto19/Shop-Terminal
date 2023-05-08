@@ -92,6 +92,4 @@ public class Cashiers {
         }
         return false;
     }
-
-
 }

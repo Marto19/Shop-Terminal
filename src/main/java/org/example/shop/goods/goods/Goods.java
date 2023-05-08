@@ -7,6 +7,9 @@ import org.example.shop.goods.services.Services;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Random;
+import java.util.Set;
+import java.util.UUID;
 
 public class Goods implements Services {
     private final long id;
@@ -23,6 +26,10 @@ public class Goods implements Services {
         this.type = type;
         this.expiryDate = expiryDate;
         this.isMarked = false;
+    }
+
+    public Goods() {
+        this.id = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
     }
 
     public long getId() {
@@ -112,4 +119,22 @@ public class Goods implements Services {
         }
     }
 
+    //when generating random goods we need to put them in the set
+    public void generateGoods(int number, Shop shop){
+        final String[] NAMES = {"apple", "banana", "orange", "watermelon", "grape", "pineapple", "mango", "pear", "kiwi", "strawberry"};
+        final Type[] TYPES = {Type.FOOD, Type.NONFOOD};
+        final BigDecimal MAX_COST = new BigDecimal("100");
+        Random rand = new Random();
+        Set<Goods> goodsSet = shop.getStoreGoods();
+
+        for (int i = 1; i <= number; i++) {
+            String name = NAMES[rand.nextInt(NAMES.length)];
+            Type type = TYPES[rand.nextInt(TYPES.length)];
+            BigDecimal unitShippingCost = new BigDecimal(rand.nextInt(MAX_COST.intValue()) + 1);
+            LocalDate expiryDate = LocalDate.now().plusDays(rand.nextInt(365));
+
+            Goods goods = new Goods(i, name, unitShippingCost, type, expiryDate);
+            goodsSet.add(goods);
+        }
+    }
 }
