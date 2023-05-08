@@ -49,7 +49,7 @@ public class Main {
         System.out.println();
         System.out.println("NQKWI GOODS TAM: ");
         Goods goods = new Goods();
-        goods.generateGoods(5, shop);
+        goods.generateGoods(5, shop, 50);
         shop.printStoreGoods();
     }
 

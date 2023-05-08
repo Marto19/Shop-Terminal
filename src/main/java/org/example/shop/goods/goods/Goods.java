@@ -18,14 +18,16 @@ public class Goods implements Services {
     private Type type;
     private LocalDate expiryDate;
     private boolean isMarked;
+    private int quantity;
 
-    public Goods(long id, String name, BigDecimal unitShippingCost, Type type, LocalDate expiryDate) {
+    public Goods(long id, String name, BigDecimal unitShippingCost, Type type, LocalDate expiryDate, int quantity) {
         this.id = id;
         this.name = name;
         this.unitShippingCost = unitShippingCost;
         this.type = type;
         this.expiryDate = expiryDate;
         this.isMarked = false;
+        this.quantity = quantity;
     }
 
     public Goods() {
@@ -52,6 +54,10 @@ public class Goods implements Services {
         return expiryDate;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
     public boolean isMarked() {
         return isMarked;
     }
@@ -69,6 +75,7 @@ public class Goods implements Services {
                 ", type=" + type +
                 ", expiryDate=" + expiryDate +
                 ", isMarked=" + isMarked +
+                ", quantity=" + quantity +
                 '}';
     }
 
@@ -113,19 +120,20 @@ public class Goods implements Services {
 
     private void handleExpiredProduct() {
         try {
-            throw new expiryDateExeption("Тhis product has expired.");
+            throw new expiryDateExeption("This product has expired.");
         } catch (expiryDateExeption e) {
             throw new RuntimeException(e);
         }
     }
 
     //when generating random goods we need to put them in the set
-    public void generateGoods(int number, Shop shop){
+    public void generateGoods(int number, Shop shop, int quantity) {
         final String[] NAMES = {"apple", "banana", "orange", "watermelon", "grape", "pineapple", "mango", "pear", "kiwi", "strawberry"};
         final Type[] TYPES = {Type.FOOD, Type.NONFOOD};
         final BigDecimal MAX_COST = new BigDecimal("100");
         Random rand = new Random();
         Set<Goods> goodsSet = shop.getStoreGoods();
+        int id = goodsSet.size() + 1; // initialize the id to the size of goodsSet + 1
 
         for (int i = 1; i <= number; i++) {
             String name = NAMES[rand.nextInt(NAMES.length)];
@@ -133,8 +141,10 @@ public class Goods implements Services {
             BigDecimal unitShippingCost = new BigDecimal(rand.nextInt(MAX_COST.intValue()) + 1);
             LocalDate expiryDate = LocalDate.now().plusDays(rand.nextInt(365));
 
-            Goods goods = new Goods(i, name, unitShippingCost, type, expiryDate);
+            Goods goods = new Goods(id, name, unitShippingCost, type, expiryDate, quantity);
             goodsSet.add(goods);
+            id++; // increment the id by 1
         }
     }
 }
+
