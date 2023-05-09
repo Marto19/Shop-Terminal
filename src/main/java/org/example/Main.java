@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.shop.Chekout;
 import org.example.shop.goods.Cashiers;
 import org.example.shop.goods.Customer;
 import org.example.shop.goods.Shop;
@@ -34,7 +35,10 @@ public class Main {
         shop.printCashiers();
 
         //now that we've created our cashiers, we need to assign them checkouts
-        shop.assignCashierToCheckout(shop.getNumberOfCheckouts(), shop.getCashiersSet());
+        Chekout chekout = new Chekout(1);
+        chekout.generateCheckOuts(shop.getNumberOfCheckouts());
+
+        shop.assignCashierToCheckout(chekout, shop.getCashiersSet());
         System.out.println();
         System.out.println("Id of the checkout and the cashier information:");
         shop.printCheckoutAndCashier();

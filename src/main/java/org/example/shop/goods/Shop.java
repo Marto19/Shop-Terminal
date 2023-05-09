@@ -1,5 +1,6 @@
 package org.example.shop.goods;
 
+import org.example.shop.Chekout;
 import org.example.shop.goods.exeptions.idExistsExeption;
 import org.example.shop.goods.goods.Goods;
 import org.example.shop.goods.overridenstructures.LimitedHashMap;
@@ -16,12 +17,11 @@ public class Shop {
     private BigDecimal nonFoodMarkup;                       //non food markup
     private int numberOfCheckouts;                          //the amount of checkouts in the store
     private int expiryDateDiscount;                         //expiry date discount
-    private Map<Integer, Cashiers> cashiersCheckoutMap;    //hashmap to store the assigment of each cashier to a checkout
+    private Map<Chekout, Cashiers> cashiersCheckoutMap;    //hashmap to store the assigment of each cashier to a checkout
     private Map<Long, Goods> idAndGoods;                //hashmap to store the id of the goods------------
     private Map<Long, String> idAndCashier;             //hashmap to store cashier's id and his/hers name. Nore: randomly generated
     private Map<Goods, Integer> goodsAndQuantity;       //hashmap to store goods and they're quantity in the store
     private Set<Cashiers> cashiersSet;      //set to store all the cashiers
-    private Map<Goods, Integer> goodsAndQuantityAfterMarking;   //map to store the goods and they're quantity after marking/selling
     private Set<Goods> storeGoods;
 
 
@@ -55,7 +55,7 @@ public class Shop {
         return expiryDateDiscount;
     }
 
-    public Map<Integer, Cashiers> getCashiersCheckoutMap() {
+    public Map<Chekout, Cashiers> getCashiersCheckoutMap() {
         return cashiersCheckoutMap;
     }
 
@@ -102,9 +102,6 @@ public class Shop {
         return goodsAndQuantity;
     }
 
-    public Map<Goods, Integer> getGoodsAndQuantityAfterMarking() {
-        return goodsAndQuantityAfterMarking;
-    }
 
     public Set<Goods> getStoreGoods() {
         return storeGoods;
@@ -144,15 +141,15 @@ public class Shop {
         storeGoods.add(goods);
     }
 
-    public void assignCashierToCheckout(int numberOfCheckouts, Set<Cashiers> cashiersSet) {
+    public void assignCashierToCheckout(Chekout chekout, Set<Cashiers> cashiersSet) {
         int checkoutNumber = 1;
         for (Cashiers cashier : cashiersSet) {
-            cashiersCheckoutMap.put(checkoutNumber++, cashier);
+            cashiersCheckoutMap.put(chekout, cashier);
         }
     }
 
     public void printCheckoutAndCashier(){
-        for (Map.Entry<Integer, Cashiers> entry : cashiersCheckoutMap.entrySet()){
+        for (Map.Entry<Chekout, Cashiers> entry : cashiersCheckoutMap.entrySet()){
             System.out.println("Checkout: " + entry.getKey() + " | " + " name: " + entry.getValue().getName() + " id = " + entry.getValue().getId());
         }
     }
