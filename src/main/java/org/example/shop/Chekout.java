@@ -22,7 +22,12 @@ public class Chekout {
                 '}';
     }
 
-    public void generateCheckOuts(int shop){
-
+    public void generateCheckOuts(Shop shop){
+        for (int i = 0; i < shop.getNumberOfCheckouts(); ++i){
+            Chekout chekout = new Chekout(i);
+        }
+    }
+    public void addCheckoutToSet(Chekout chekout, Shop shop){
+       // shop.addC
     }
 }

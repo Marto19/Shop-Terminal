@@ -55,7 +55,6 @@ public class Cashiers {
                 //long id = random.nextLong();
                 long id = i+1;
                 BigDecimal monthlySalary = BigDecimal.valueOf(2000);//BigDecimal.valueOf(random.nextInt(5000) + 2000)
-
                 Cashiers cashier = new Cashiers(name, id, monthlySalary); //THE NAME IS RANDOMLY GENERATED SUCH AS: Cashier660, THAT'S THE NAME
                 shop.addEmployeeToStore(cashier);
                 shop.addCashierToSet(cashier);
