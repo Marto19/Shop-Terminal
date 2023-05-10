@@ -10,7 +10,7 @@ import java.util.Map;
 public class Customer {
     private String name;
     private BigDecimal balance;
-    private Map<String, Integer> shoppingList = new HashMap<>();
+    private Map<String, Integer> shoppingList = new HashMap<>();        //thats the shopping list
 
     public Customer(String name, BigDecimal balance, Map<String, Integer> shoppingList) {
         this.name = name;

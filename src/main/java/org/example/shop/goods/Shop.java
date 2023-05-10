@@ -20,9 +20,8 @@ public class Shop {
     private Map<Long, String> idAndCashier;             //hashmap to store cashier's id and his/hers name. Nore: randomly generated
     //private Map<Goods, Integer> goodsAndQuantity;       //hashmap to store goods and they're quantity in the store
     private Set<Cashiers> cashiersSet;      //set to store all the cashiers
-    private Set<Goods> storeGoods;
-    private Set<Chekout> checkoutSet;
-
+    private Set<Goods> storeGoods;          //store's inventory
+    private Set<Chekout> checkoutSet;       //set with the checkouts
 
 
     public Shop(BigDecimal foodMarkup, BigDecimal nonFoodMarkup, int numberOfCheckouts, int expiryDateDiscount) {
@@ -83,27 +82,26 @@ public class Shop {
     }
 
     public Cashiers checkIfIdExists(Cashiers cashiers) throws idExistsExeption {
-        if (idAndCashier.containsKey(cashiers.getId())){
+        if (idAndCashier.containsKey(cashiers.getId())) {
             throw new idExistsExeption("ID already exists");
-        }
-        else{
+        } else {
             return cashiers;
         }
     }
 
-    public void addEmployeeToStore(Cashiers cashier){
+    public void addEmployeeToStore(Cashiers cashier) {
         idAndCashier.put(cashier.getId(), cashier.getName());
     }
 
-    public void addCashierToSet(Cashiers cashier){
+    public void addCashierToSet(Cashiers cashier) {
         cashiersSet.add(cashier);
     }
 
-    public void addGoodsToSet(Goods goods){
+    public void addGoodsToSet(Goods goods) {
         storeGoods.add(goods);
     }
 
-    public void addCheckoutToSet(Chekout chekout){
+    public void addCheckoutToSet(Chekout chekout) {
         checkoutSet.add(chekout);
     }
 
@@ -143,54 +141,65 @@ public class Shop {
     }
 
 
-    public void printCheckoutAndCashier(){
-        for (Map.Entry<Chekout, Cashiers> entry : cashiersCheckoutMap.entrySet()){
+    public void printCheckoutAndCashier() {
+        for (Map.Entry<Chekout, Cashiers> entry : cashiersCheckoutMap.entrySet()) {
             System.out.println("Checkout: " + entry.getKey() + " | " + " name: " + entry.getValue().getName() + " id = " + entry.getValue().getId());
         }
     }
 
-    public void printCheckoutSet(){
-        for (Chekout chekout : checkoutSet){
+    public void printCheckoutSet() {
+        for (Chekout chekout : checkoutSet) {
             System.out.println(chekout);
         }
     }
 
-    public void printIdAndCashier(){
-        for (Map.Entry<Long, String> entry : idAndCashier.entrySet()){
+    public void printIdAndCashier() {
+        for (Map.Entry<Long, String> entry : idAndCashier.entrySet()) {
             System.out.println("Id: " + entry.getKey() + " | " + "name: " + entry.getValue());
         }
     }
 
-    public void printCashiers(){
-        for (Cashiers cashier : cashiersSet){
+    public void printCashiers() {
+        for (Cashiers cashier : cashiersSet) {
             System.out.println(cashier);
         }
     }
 
 
-    public void printStoreGoods(){
-        for (Goods goods : getStoreGoods()){
+    public void printStoreGoods() {
+        for (Goods goods : getStoreGoods()) {
             System.out.println(goods);
         }
     }
 
-    public void removeGoodsQuantity(Shop shop, Customer customer){
-//        Integer currentQuantity = shop.goodsAndQuantity.get(good);
-//        if (currentQuantity != null) {
-//            int newQuantity = currentQuantity - quantity;
-//            if (newQuantity <= 0) {
-//                // if the new quantity is zero or negative, remove the good from the map
-//                shop.goodsAndQuantity.remove(good);
-//            } else {
-//                // otherwise, update the map with the new quantity
-//                shop.goodsAndQuantity.put(good, newQuantity);
-//            }
-//        }
 
-        //REMOVE GOODS OR GOODS QUANTITY FROM STORE GOODS SET, WE NEED THE CUSTOMERS SHOPPING LIST
+    public void removeGoodsQuantity(Customer customer, Shop shop) {
+        Map<String, Integer> shoppingList = customer.getShoppingList();
+        Set<Goods> storeGoods = shop.getStoreGoods();
+        for (Map.Entry<String, Integer> entry : shoppingList.entrySet()) {
+            String goodName = entry.getKey();
+            int desiredQuantity = entry.getValue();
+            if (!storeGoods.stream().anyMatch(g -> g.getName().equals(goodName))) {
+                // Skip if the good is not in the inventory
+                continue;
+            }
+            Goods good = storeGoods.stream()
+                    .filter(g -> g.getName().equals(goodName))
+                    .findFirst()
+                    .orElse(null);
 
+            if (good != null && good.getQuantity() >= desiredQuantity) {
+                int availableQuantity = good.getQuantity();
+                int updatedQuantity = availableQuantity - desiredQuantity;
+                good.setQuantity(updatedQuantity);
+            } else {
+                // Skip if the desired quantity is greater than the available quantity
+                continue;
+            }
+        }
+
+        shop.setStoreGoods(storeGoods);
     }
-
 
 }
 
