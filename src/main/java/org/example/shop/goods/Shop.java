@@ -7,10 +7,7 @@ import org.example.shop.goods.overridenstructures.LimitedHashMap;
 
 import javax.security.auth.callback.CallbackHandler;
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class Shop {
     private BigDecimal foodMarkup;                          //food markup
@@ -133,12 +130,18 @@ public class Shop {
                 '}';
     }
 
-    public void assignCashierToCheckout(Chekout chekout, Set<Cashiers> cashiersSet) {
-        int checkoutNumber = 1;
-        for (Cashiers cashier : cashiersSet) {
-            cashiersCheckoutMap.put(chekout, cashier);
+    public void assignCashierToCheckout(Set<Chekout> checkoutSet, Set<Cashiers> cashierSet) {
+        Iterator<Cashiers> cashierIterator = cashierSet.iterator();
+        for (Chekout checkout : checkoutSet) {
+            if (cashierIterator.hasNext()) {
+                Cashiers cashier = cashierIterator.next();
+                cashiersCheckoutMap.put(checkout, cashier);
+            } else {
+                break; // stop assigning cashiers if we run out of cashiers
+            }
         }
     }
+
 
     public void printCheckoutAndCashier(){
         for (Map.Entry<Chekout, Cashiers> entry : cashiersCheckoutMap.entrySet()){

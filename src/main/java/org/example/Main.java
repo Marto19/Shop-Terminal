@@ -42,7 +42,7 @@ public class Main {
         System.out.println("The checkouts: ");
         shop.printCheckoutSet();
 
-        shop.assignCashierToCheckout(chekout, shop.getCashiersSet());
+        shop.assignCashierToCheckout(shop.getCheckoutSet(), shop.getCashiersSet());
         System.out.println();
         System.out.println("Id of the checkout and the cashier information:");
         shop.printCheckoutAndCashier();
