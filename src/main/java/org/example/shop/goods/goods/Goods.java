@@ -133,6 +133,9 @@ public class Goods implements Services {
     }
 
     //when generating random goods we need to put them in the set
+
+
+    //BELLOW IS THE GENERATEGOODS METHOD, BROKEN INTO SMALLER METHODS
     public void generateGoods(int number, Shop shop, int quantity) {
         Random rand = new Random();
         Set<Goods> goodsSet = shop.getStoreGoods();
@@ -167,11 +170,9 @@ public class Goods implements Services {
         }
         return null;
     }
-
     private Goods createGoods(int id, String name, BigDecimal unitShippingCost, Type type, LocalDate expiryDate, int quantity) {
         return new Goods(id, name, unitShippingCost, type, expiryDate, quantity);
     }
-
 
 }
 

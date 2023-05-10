@@ -55,9 +55,9 @@ public class Main {
 
         //and now that we have our shop ready, the cashiers ready
         System.out.println();
-        System.out.println("NQKWI GOODS TAM: ");
+        System.out.println("Shops Inventory: ");
         Goods goods = new Goods();
-        goods.generateGoods(5, shop, 50);
+        goods.generateGoods(10, shop, 50);
         shop.printStoreGoods();
     }
 
