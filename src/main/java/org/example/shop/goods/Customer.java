@@ -80,6 +80,7 @@ public class Customer {
     private static Map<String, Integer> getRandomShoppingList() {
         Map<String, Integer> shoppingList = new HashMap<>();
         String[] goods = {"apple", "banana", "orange", "peach", "pear", "grape", "watermelon", "pineapple", "mango"};
+        //NEED TO MAKE IT WITH THE ITEMS THAT STORE OFFERS, IF THE STORE DO NOT OFFER-EXCEPTION
         int numItems = (int) (Math.random() * 5 + 1);
         for (int i = 0; i < numItems; i++) {
             String item = goods[(int) (Math.random() * goods.length)];

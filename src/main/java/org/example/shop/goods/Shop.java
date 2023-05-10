@@ -171,7 +171,7 @@ public class Shop {
         }
     }
 
-    public void removeGoodsQuantity(Shop shop, Goods good, int quantity){
+    public void removeGoodsQuantity(Shop shop, Customer customer){
 //        Integer currentQuantity = shop.goodsAndQuantity.get(good);
 //        if (currentQuantity != null) {
 //            int newQuantity = currentQuantity - quantity;
@@ -184,6 +184,7 @@ public class Shop {
 //            }
 //        }
 
+        //REMOVE GOODS OR GOODS QUANTITY FROM STORE GOODS SET, WE NEED THE CUSTOMERS SHOPPING LIST
 
     }
 
