@@ -2,10 +2,12 @@ package org.example.shop.goods;
 
 import org.example.shop.goods.exeptions.EmployeesExceedShopLimit;
 import org.example.shop.goods.goods.Goods;
+import org.example.shop.goods.goods.Type;
 
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 
 public class Cashiers {
@@ -70,7 +72,7 @@ public class Cashiers {
         }
     }
 
-    public void productMarking(Shop shop, Cashiers cashiers, Customer customer) {
+    public void productMarking(Shop shop, Cashiers cashiers, Customer customer) {           //customers
         Map<String, Integer> shoppingList = customer.getShoppingList();
         for (Map.Entry<String, Integer> entry : shoppingList.entrySet()) {
             String itemName = entry.getKey();
@@ -83,12 +85,14 @@ public class Cashiers {
     }
 
     private boolean checkIfItemExists(Shop shop, String itemName, int quantity) {
-        for (Map.Entry<Goods, Integer> goodsEntry : shop.getQuantityAndGoods().entrySet()) {
-            if (goodsEntry.getKey().getName().equals(itemName) && goodsEntry.getValue() >= quantity) {
-                goodsEntry.getKey().setMarked(true);
+        for (Goods goods : shop.getStoreGoods()) {
+            if (goods.getName().equals(itemName) && goods.getQuantity() >= quantity) {
+                goods.setMarked(true);
                 return true;
             }
         }
         return false;
     }
+
+
 }

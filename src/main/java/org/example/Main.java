@@ -36,7 +36,11 @@ public class Main {
 
         //now that we've created our cashiers, we need to assign them checkouts
         Chekout chekout = new Chekout(1);
-        chekout.generateCheckOuts(shop.getNumberOfCheckouts());
+        chekout.generateCheckOuts(shop.getNumberOfCheckouts(), shop);
+
+        System.out.println();
+        System.out.println("The checkouts: ");
+        shop.printCheckoutSet();
 
         shop.assignCashierToCheckout(chekout, shop.getCashiersSet());
         System.out.println();

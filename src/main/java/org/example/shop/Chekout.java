@@ -17,17 +17,14 @@ public class Chekout {
 
     @Override
     public String toString() {
-        return "Chekout{" +
-                "uid=" + uid +
-                '}';
+        return "Chekout: " +
+                "uid=" + uid;
     }
 
-    public void generateCheckOuts(Shop shop){
-        for (int i = 0; i < shop.getNumberOfCheckouts(); ++i){
+    public void generateCheckOuts(int numberOfChekouts, Shop shop){
+        for (int i = 0; i < numberOfChekouts; ++i){
             Chekout chekout = new Chekout(i);
+            shop.addCheckoutToSet(chekout);
         }
-    }
-    public void addCheckoutToSet(Chekout chekout, Shop shop){
-       // shop.addC
     }
 }

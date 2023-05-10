@@ -20,6 +20,10 @@ public class Goods implements Services {
     private boolean isMarked;
     private int quantity;
 
+    private final String[] FOODNAMES = {"apple", "banana", "orange", "watermelon", "grape", "pineapple", "mango", "pear", "kiwi", "strawberry"};
+    private final String[] NONFOODNAMES = {"shampoo", "battery", "glass", "notebook", "keyboard", "monitor", "headphones", "skate", "book", "bike"};
+    private final BigDecimal MAX_COST = new BigDecimal("100");
+
     public Goods(long id, String name, BigDecimal unitShippingCost, Type type, LocalDate expiryDate, int quantity) {
         this.id = id;
         this.name = name;
@@ -128,23 +132,23 @@ public class Goods implements Services {
 
     //when generating random goods we need to put them in the set
     public void generateGoods(int number, Shop shop, int quantity) {
-        final String[] NAMES = {"apple", "banana", "orange", "watermelon", "grape", "pineapple", "mango", "pear", "kiwi", "strawberry"};
-        final Type[] TYPES = {Type.FOOD, Type.NONFOOD};
-        final BigDecimal MAX_COST = new BigDecimal("100");
         Random rand = new Random();
         Set<Goods> goodsSet = shop.getStoreGoods();
         int id = goodsSet.size() + 1; // initialize the id to the size of goodsSet + 1
 
         for (int i = 1; i <= number; i++) {
-            String name = NAMES[rand.nextInt(NAMES.length)];
-            Type type = TYPES[rand.nextInt(TYPES.length)];
+            Type type = Type.values()[rand.nextInt(Type.values().length)];
+            String[] names = type == Type.FOOD ? FOODNAMES : NONFOODNAMES;
+            String name = names[rand.nextInt(names.length)];
+
             BigDecimal unitShippingCost = new BigDecimal(rand.nextInt(MAX_COST.intValue()) + 1);
             LocalDate expiryDate = LocalDate.now().plusDays(rand.nextInt(365));
 
             Goods goods = new Goods(id, name, unitShippingCost, type, expiryDate, quantity);
-            goodsSet.add(goods);
+            shop.addGoodsToSet(goods);
             id++; // increment the id by 1
         }
     }
+
 }
 

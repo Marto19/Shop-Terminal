@@ -19,11 +19,12 @@ public class Shop {
     private int expiryDateDiscount;                         //expiry date discount
 
     private Map<Chekout, Cashiers> cashiersCheckoutMap;    //hashmap to store the assigment of each cashier to a checkout
-    private Map<Long, Goods> idAndGoods;                //hashmap to store the id of the goods------------
+    private Map<Long, Goods> idAndGoods;                //hashmap to store the id of the goods------------im not sure if i need it
     private Map<Long, String> idAndCashier;             //hashmap to store cashier's id and his/hers name. Nore: randomly generated
     //private Map<Goods, Integer> goodsAndQuantity;       //hashmap to store goods and they're quantity in the store
     private Set<Cashiers> cashiersSet;      //set to store all the cashiers
     private Set<Goods> storeGoods;
+    private Set<Chekout> checkoutSet;
 
 
 
@@ -37,6 +38,7 @@ public class Shop {
         this.idAndCashier = new LimitedHashMap<>(numberOfCheckouts);  //when creating a new store the other storages will be created automatically
         this.cashiersSet = new HashSet<>();
         this.storeGoods = new HashSet<>();
+        this.checkoutSet = new HashSet<>();
     }
 
     public BigDecimal getFoodMarkup() {
@@ -75,6 +77,14 @@ public class Shop {
         return cashiersSet;
     }
 
+    public Set<Chekout> getCheckoutSet() {
+        return checkoutSet;
+    }
+
+    public Set<Goods> getStoreGoods() {
+        return storeGoods;
+    }
+
     public Cashiers checkIfIdExists(Cashiers cashiers) throws idExistsExeption {
         if (idAndCashier.containsKey(cashiers.getId())){
             throw new idExistsExeption("ID already exists");
@@ -88,10 +98,17 @@ public class Shop {
         idAndCashier.put(cashier.getId(), cashier.getName());
     }
 
-    public void addEmployeeToSet(Cashiers cashier){
+    public void addCashierToSet(Cashiers cashier){
         cashiersSet.add(cashier);
     }
 
+    public void addGoodsToSet(Goods goods){
+        storeGoods.add(goods);
+    }
+
+    public void addCheckoutToSet(Chekout chekout){
+        checkoutSet.add(chekout);
+    }
 
 //    public void addGoodsToMap(Goods goods, int quantity){
 //        //principno tuk shte e po-dobre da gi razdedlish na foodtype i nonfoodtype
@@ -101,11 +118,6 @@ public class Shop {
 //    public Map<Goods, Integer> getGoodsAndQuantity() {
 //        return goodsAndQuantity;
 //    }
-
-
-    public Set<Goods> getStoreGoods() {
-        return storeGoods;
-    }
 
     @Override
     public String toString() {
@@ -121,26 +133,6 @@ public class Shop {
                 '}';
     }
 
-    public void printIdAndCashier(){
-        for (Map.Entry<Long, String> entry : idAndCashier.entrySet()){
-            System.out.println("Id: " + entry.getKey() + " | " + "name: " + entry.getValue());
-        }
-    }
-
-    public void printCashiers(){
-        for (Cashiers cashier : cashiersSet){
-            System.out.println(cashier);
-        }
-    }
-
-    public void addCashierToSet(Cashiers cashier){
-        cashiersSet.add(cashier);
-    }
-
-    public void addGoodsToSet(Goods goods){
-        storeGoods.add(goods);
-    }
-
     public void assignCashierToCheckout(Chekout chekout, Set<Cashiers> cashiersSet) {
         int checkoutNumber = 1;
         for (Cashiers cashier : cashiersSet) {
@@ -153,6 +145,25 @@ public class Shop {
             System.out.println("Checkout: " + entry.getKey() + " | " + " name: " + entry.getValue().getName() + " id = " + entry.getValue().getId());
         }
     }
+
+    public void printCheckoutSet(){
+        for (Chekout chekout : checkoutSet){
+            System.out.println(chekout);
+        }
+    }
+
+    public void printIdAndCashier(){
+        for (Map.Entry<Long, String> entry : idAndCashier.entrySet()){
+            System.out.println("Id: " + entry.getKey() + " | " + "name: " + entry.getValue());
+        }
+    }
+
+    public void printCashiers(){
+        for (Cashiers cashier : cashiersSet){
+            System.out.println(cashier);
+        }
+    }
+
 
     public void printStoreGoods(){
         for (Goods goods : getStoreGoods()){
