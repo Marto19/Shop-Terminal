@@ -29,7 +29,9 @@ public class Goods implements Services {
         this.name = name;
         this.unitShippingCost = unitShippingCost;
         this.type = type;
-        this.expiryDate = expiryDate;
+        if (type == Type.FOOD) {
+            this.expiryDate = LocalDate.now().plusDays(new Random().nextInt(365));
+        }
         this.isMarked = false;
         this.quantity = quantity;
     }
@@ -135,20 +137,41 @@ public class Goods implements Services {
         Random rand = new Random();
         Set<Goods> goodsSet = shop.getStoreGoods();
         int id = goodsSet.size() + 1; // initialize the id to the size of goodsSet + 1
-
         for (int i = 1; i <= number; i++) {
-            Type type = Type.values()[rand.nextInt(Type.values().length)];
-            String[] names = type == Type.FOOD ? FOODNAMES : NONFOODNAMES;
-            String name = names[rand.nextInt(names.length)];
-
-            BigDecimal unitShippingCost = new BigDecimal(rand.nextInt(MAX_COST.intValue()) + 1);
-            LocalDate expiryDate = LocalDate.now().plusDays(rand.nextInt(365));
-
-            Goods goods = new Goods(id, name, unitShippingCost, type, expiryDate, quantity);
+            Type type = getRandomType(rand);
+            String name = getRandomName(type, rand);
+            BigDecimal unitShippingCost = getRandomShippingCost(rand);
+            LocalDate expiryDate = getExpiryDate(type, rand);
+            Goods goods = createGoods(id, name, unitShippingCost, type, expiryDate, quantity);
             shop.addGoodsToSet(goods);
             id++; // increment the id by 1
         }
     }
+
+    private Type getRandomType(Random rand) {
+        return Type.values()[rand.nextInt(Type.values().length)];
+    }
+
+    private String getRandomName(Type type, Random rand) {
+        String[] names = type == Type.FOOD ? FOODNAMES : NONFOODNAMES;
+        return names[rand.nextInt(names.length)];
+    }
+
+    private BigDecimal getRandomShippingCost(Random rand) {
+        return new BigDecimal(rand.nextInt(MAX_COST.intValue()) + 1);
+    }
+
+    private LocalDate getExpiryDate(Type type, Random rand) {
+        if (type == Type.FOOD) {
+            return LocalDate.now().plusDays(rand.nextInt(365));
+        }
+        return null;
+    }
+
+    private Goods createGoods(int id, String name, BigDecimal unitShippingCost, Type type, LocalDate expiryDate, int quantity) {
+        return new Goods(id, name, unitShippingCost, type, expiryDate, quantity);
+    }
+
 
 }
 
