@@ -10,13 +10,14 @@ import java.math.BigDecimal;
 import java.util.*;
 
 public class Shop {
-    private BigDecimal foodMarkup;                          //food markup
-    private BigDecimal nonFoodMarkup;                       //non food markup
+    private BigDecimal foodMarkup;                          //food markup       --ENUM MAP
+    private BigDecimal nonFoodMarkup;                       //non food markup --ENUM MAP//KEY TYPE, VALUE BIGDECIMAL
     private int numberOfCheckouts;                          //the amount of checkouts in the store
-    private int expiryDateDiscount;                         //expiry date discount
+    private BigDecimal expiryDateDiscount;                         //expiry date discount
+    //dateuntils-DOBAWI DNITE SPORED MAGAZINA
 
-    private Map<Chekout, Cashiers> cashiersCheckoutMap;    //hashmap to store the assigment of each cashier to a checkout
-    private Map<Long, Goods> idAndGoods;                //hashmap to store the id of the goods------------im not sure if i need it
+    private Map<Chekout, Cashiers> cashiersCheckoutMap;    //hashmap to stoNE TRWQQre the assigment of each cashier to a checkout
+    private Map<Long, Goods> idAndGoods;                //hashmap to sNE TRQQ tore the id of the goods------------im not sure if i need it
     private Map<Long, String> idAndCashier;             //hashmap to store cashier's id and his/hers name. Nore: randomly generated
     //private Map<Goods, Integer> goodsAndQuantity;       //hashmap to store goods and they're quantity in the store
     private Set<Cashiers> cashiersSet;      //set to store all the cashiers
@@ -134,6 +135,7 @@ public class Shop {
             if (cashierIterator.hasNext()) {
                 Cashiers cashier = cashierIterator.next();
                 cashiersCheckoutMap.put(checkout, cashier);
+                cashiersCheckoutMap.containsValue(cashier); //
             } else {
                 break; // stop assigning cashiers if we run out of cashiers
             }
@@ -173,33 +175,33 @@ public class Shop {
     }
 
 
-    public void removeGoodsQuantity(Customer customer, Shop shop) {
-        Map<String, Integer> shoppingList = customer.getShoppingList();
-        Set<Goods> storeGoods = shop.getStoreGoods();
-        for (Map.Entry<String, Integer> entry : shoppingList.entrySet()) {
-            String goodName = entry.getKey();
-            int desiredQuantity = entry.getValue();
-            if (!storeGoods.stream().anyMatch(g -> g.getName().equals(goodName))) {
-                // Skip if the good is not in the inventory
-                continue;
-            }
-            Goods good = storeGoods.stream()
-                    .filter(g -> g.getName().equals(goodName))
-                    .findFirst()
-                    .orElse(null);
-
-            if (good != null && good.getQuantity() >= desiredQuantity) {
-                int availableQuantity = good.getQuantity();
-                int updatedQuantity = availableQuantity - desiredQuantity;
-                good.setQuantity(updatedQuantity);
-            } else {
-                // Skip if the desired quantity is greater than the available quantity
-                continue;
-            }
-        }
-
-        shop.setStoreGoods(storeGoods);
-    }
+//    public void removeGoodsQuantity(Customer customer, Shop shop) {
+//        Map<String, Integer> shoppingList = customer.getShoppingList();
+//        Set<Goods> storeGoods = shop.getStoreGoods();
+//        for (Map.Entry<String, Integer> entry : shoppingList.entrySet()) {
+//            String goodName = entry.getKey();
+//            int desiredQuantity = entry.getValue();
+//            if (!storeGoods.stream().anyMatch(g -> g.getName().equals(goodName))) {
+//                // Skip if the good is not in the inventory
+//                continue;
+//            }
+//            Goods good = storeGoods.stream()
+//                    .filter(g -> g.getName().equals(goodName))
+//                    .findFirst()
+//                    .orElse(null);
+//
+//            if (good != null && good.getQuantity() >= desiredQuantity) {
+//                int availableQuantity = good.getQuantity();
+//                int updatedQuantity = availableQuantity - desiredQuantity;
+//                good.setQuantity(updatedQuantity);
+//            } else {
+//                // Skip if the desired quantity is greater than the available quantity
+//                continue;
+//            }
+//        }
+//
+//        shop.setStoreGoods(storeGoods);
+//    }
 
 }
 

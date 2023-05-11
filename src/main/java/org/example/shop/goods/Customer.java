@@ -1,5 +1,7 @@
 package org.example.shop.goods;
 
+import org.example.shop.goods.goods.Goods;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -10,9 +12,9 @@ import java.util.Map;
 public class Customer {
     private String name;
     private BigDecimal balance;
-    private Map<String, Integer> shoppingList = new HashMap<>();        //thats the shopping list
+    private Map<Goods, Integer> shoppingList = new HashMap<>();        //thats the shopping list
 
-    public Customer(String name, BigDecimal balance, Map<String, Integer> shoppingList) {
+    public Customer(String name, BigDecimal balance, Map<Goods, Integer> shoppingList) {
         this.name = name;
         this.balance = balance;
         this.shoppingList = shoppingList;
@@ -36,11 +38,11 @@ public class Customer {
         this.balance = balance;
     }
 
-    public Map<String, Integer> getShoppingList() {
+    public Map<Goods, Integer> getShoppingList() {
         return shoppingList;
     }
 
-    public void setShoppingList(Map<String, Integer> shoppingList) {
+    public void setShoppingList(Map<Goods, Integer> shoppingList) {
         this.shoppingList = shoppingList;
     }
 

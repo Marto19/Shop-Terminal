@@ -73,8 +73,8 @@ public class Cashiers {
     }
 
     public void productMarking(Shop shop, Cashiers cashiers, Customer customer) {           //customers
-        Map<String, Integer> shoppingList = customer.getShoppingList();
-        for (Map.Entry<String, Integer> entry : shoppingList.entrySet()) {
+        Map<Goods, Integer> shoppingList = customer.getShoppingList();
+        for (Map.Entry<Goods, Integer> entry : shoppingList.entrySet()) {
             String itemName = entry.getKey();
             int quantity = entry.getValue();
             boolean itemExists = checkIfItemExists(shop, itemName, quantity);

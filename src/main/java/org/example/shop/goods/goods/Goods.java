@@ -18,7 +18,7 @@ public class Goods implements Services {
     private Type type;
     private LocalDate expiryDate;
     private boolean isMarked;
-    private int quantity;
+    private int quantity;       //KG -BIGDECIMAL
 
     private final String[] FOODNAMES = {"apple", "banana", "orange", "watermelon", "grape", "pineapple", "mango", "pear", "kiwi", "strawberry"};
     private final String[] NONFOODNAMES = {"shampoo", "battery", "glass", "notebook", "keyboard", "monitor", "headphones", "skate", "book", "bike"};
