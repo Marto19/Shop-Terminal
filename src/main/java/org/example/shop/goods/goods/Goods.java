@@ -120,7 +120,7 @@ public class Goods implements Services {
     }
 
     private BigDecimal subtractFromPrice(BigDecimal unitShippingCost, Shop shop) {
-        unitShippingCost = unitShippingCost.multiply(BigDecimal.valueOf(shop.getExpiryDateDiscount()).divide(BigDecimal.valueOf(100)));
+        unitShippingCost = unitShippingCost.multiply(shop.getExpiryDateDiscount().divide(BigDecimal.valueOf(100)));
         return unitShippingCost;                // logic to subtract from price goes here
     }
 
