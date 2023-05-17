@@ -1,10 +1,12 @@
 package org.example.shop;
 
+import org.example.shop.goods.Customer;
 import org.example.shop.goods.Shop;
+import org.example.shop.goods.services.CheckoutServices;
 
 import java.util.UUID;
 
-public class Chekout {
+public class Chekout implements CheckoutServices {
     private final int uid;
 
     public Chekout(int uid) {
@@ -26,5 +28,11 @@ public class Chekout {
             Chekout chekout = new Chekout(i);
             shop.addCheckoutToSet(chekout);
         }
+    }
+
+
+    @Override
+    public void sellGoods(Customer customer, Shop shop) {
+
     }
 }
