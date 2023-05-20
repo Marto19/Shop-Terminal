@@ -154,8 +154,6 @@ public class Shop {
             System.out.println(goods);
         }
     }
-
-
 }
 
 //TODO: CREATE RECEIPT CLASS, EVERYTIME WE SELL A GOOD FROM THE STORE TO BE CREATED. INFO NEEDED:Next number,

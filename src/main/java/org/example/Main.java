@@ -51,10 +51,11 @@ public class Main {
         shop.printCheckoutAndCashier();
 
         //now we need customers
-//        List<Customer> customers = Customer.generateRandomCustomers(10);
-//        System.out.println();
-//        System.out.println("These are the customers: ");
-//        Customer.printCustomers(customers);
+        List<Customer> customers = Customer.generateRandomCustomers(10);
+        System.out.println();
+        System.out.println("These are the customers: ");
+        Customer.printCustomers(customers);
+
 
 
         //and now that we have our shop ready, the cashiers ready

@@ -98,7 +98,7 @@ public class Goods implements Services {
             }
         } else if(type == Type.NONFOOD){
             if(daysUntilExpiry <= 10){
-                unitShippingCost = applyFoodMarkup(unitShippingCost, shop.getNonFoodMarkup());//new number = old number + (old number * 0.1)
+                unitShippingCost = applyNonFoodMarkup(unitShippingCost, shop.getNonFoodMarkup());//new number = old number + (old number * 0.1)
                 subtractFromPrice(unitShippingCost, shop);//SUBTRACT FROM THE PRICE
             } else{
                 handleExpiredProduct();
@@ -133,7 +133,6 @@ public class Goods implements Services {
     }
 
     //when generating random goods we need to put them in the set
-
 
     //BELLOW IS THE GENERATEGOODS METHOD, BROKEN INTO SMALLER METHODS
     public void generateGoods(int number, Shop shop, int quantity) {

@@ -56,50 +56,50 @@ public class Customer {
     }
 
     //-------------------------methods to generate random customer--------------------------------
-//    public static List<Customer> generateRandomCustomers(int count) {
-//        List<Customer> customers = new ArrayList<>();
-//        for (int i = 0; i < count; i++) {
-//            customers.add(generateRandomCustomer());
-//        }
-//        return customers;
-//    }
-//
-//    private static Customer generateRandomCustomer() {
-//        Random random = new Random();
-//        String name = getRandomName(random);
-//        BigDecimal balance = getRandomBalance(random);
-//        Map<Goods, Integer> shoppingList = generateRandomShoppingList(random);
-//        return new Customer(name, balance, shoppingList);
-//    }
-//
-//    private static String getRandomName(Random random) {
-//        int index = random.nextInt(CUSTOMER_NAMES.length);
-//        return CUSTOMER_NAMES[index];
-//    }
-//
-//    private static BigDecimal getRandomBalance(Random random) {
-//        double value = random.nextDouble() * MAX_BALANCE.doubleValue();
-//        return BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP);
-//    }
-//
-//    private static Map<Goods, Integer> generateRandomShoppingList(Random random) {
-//        Map<Goods, Integer> shoppingList = new HashMap<>();
-//        int goodsCount = random.nextInt(MAX_GOODS_PER_CUSTOMER) + 1;
-//        for (int i = 0; i < goodsCount; i++) {
-//            Goods goods = generateRandomGoods(random);
-//            int quantity = random.nextInt(MAX_QUANTITY_PER_GOOD) + 1;
-//            shoppingList.put(goods, quantity);
-//        }
-//        return shoppingList;
-//    }
-//
-//    private static Goods generateRandomGoods(Random random) {
-//        long id = random.nextLong();
-//        String name = "Random Goods";
-//        BigDecimal unitShippingCost = BigDecimal.valueOf(random.nextDouble() * 100).setScale(2, RoundingMode.HALF_UP);
-//        Type type = Type.values()[random.nextInt(Type.values().length)];
-//        return new Goods(id, name, unitShippingCost, type, null, 0);
-//    }
+    public static List<Customer> generateRandomCustomers(int count) {
+        List<Customer> customers = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            customers.add(generateRandomCustomer());
+        }
+        return customers;
+    }
+
+    private static Customer generateRandomCustomer() {
+        Random random = new Random();
+        String name = getRandomName(random);
+        BigDecimal balance = getRandomBalance(random);
+        Map<Goods, Integer> shoppingList = generateRandomShoppingList(random);
+        return new Customer(name, balance, shoppingList);
+    }
+
+    private static String getRandomName(Random random) {
+        int index = random.nextInt(CUSTOMER_NAMES.length);
+        return CUSTOMER_NAMES[index];
+    }
+
+    private static BigDecimal getRandomBalance(Random random) {
+        double value = random.nextDouble() * MAX_BALANCE.doubleValue();
+        return BigDecimal.valueOf(value).setScale(2, RoundingMode.HALF_UP);
+    }
+
+    private static Map<Goods, Integer> generateRandomShoppingList(Random random) {
+        Map<Goods, Integer> shoppingList = new HashMap<>();
+        int goodsCount = random.nextInt(MAX_GOODS_PER_CUSTOMER) + 1;
+        for (int i = 0; i < goodsCount; i++) {
+            Goods goods = generateRandomGoods(random);
+            int quantity = random.nextInt(MAX_QUANTITY_PER_GOOD) + 1;
+            shoppingList.put(goods, quantity);
+        }
+        return shoppingList;
+    }
+
+    private static Goods generateRandomGoods(Random random) {
+        long id = random.nextLong();
+        String name = "Random Goods";
+        BigDecimal unitShippingCost = BigDecimal.valueOf(random.nextDouble() * 100).setScale(2, RoundingMode.HALF_UP);
+        Type type = Type.values()[random.nextInt(Type.values().length)];
+        return new Goods(id, name, unitShippingCost, type, null, 0);
+    }
 
     public static void printCustomers(List<Customer> customers) {
         for (Customer customer : customers) {
